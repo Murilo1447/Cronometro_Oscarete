@@ -61,3 +61,19 @@ body {
     filter: drop-shadow(0px 0px 6px rgba(255, 0, 0, 0.8));
 }
 
+.bloquear-clique {
+  pointer-events: none; /* Impede qualquer clique ou redirecionamento */
+  user-select: none;    /* Impede selecionar o texto */
+}
+
+/* Escudo transparente para bloquear cliques no iframe */
+.escudo-bloqueio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999; /* Fica acima de tudo no relógio */
+    background: transparent;
+    cursor: default;
+}
