@@ -30,7 +30,7 @@ body {
 /* Posiciona e inclina o cronômetro para encaixar na perspectiva do relógio */
 .clock-display {
     position: absolute;
-    top: 55%;        /* Ajuste fino da altura vertical */
+    top: 55%;       /* Ajuste fino da altura vertical */
     left: 52%;       /* Posição horizontal centralizada no visor */
     width: 45%;        /* Largura ajustada para caber dentro da moldura */
     
