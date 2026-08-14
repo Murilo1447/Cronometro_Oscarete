@@ -13,38 +13,51 @@ body {
     overflow: hidden;
 }
 
-/* Contêiner principal amarrado na proporção da imagem (16:9) */
+/* Container amarrado na proporção da imagem (16:9) */
 .backrooms-container {
     position: relative;
     width: 100vw;
     max-width: 1200px;
-    aspect-ratio: 16 / 9; /* Garante que a caixa nunca mude de proporção */
+    aspect-ratio: 16 / 9;
     background-image: url('fundo.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-/* O cronômetro fica preso proporcionalmente à imagem */
+/* Encaixe e inclinação exata na moldura */
+/* Posiciona e estica os números no visor do relógio */
+/* Correção da perspectiva (invertendo a rotação) */
 .clock-display {
     position: absolute;
-    top: 55%;       /* Posição vertical exata no visor */
-    left: 52%;      /* Posição horizontal exata no visor */
-    width: 45%;     /* Largura proporcional do relógio */
+    top: 55.5%;          /* Posição vertical */
+    left: 54%;         /* Posição horizontal */
+    width: 42%;          /* Largura dentro da moldura */
+    
+    /* Perspectiva e rotações corrigidas para o ângulo do relógio */
     transform: translate(-50%, -50%) 
-               perspective(600px) 
-               rotateY(-7deg) 
-               rotateX(6deg)
-               rotateZ(-0.99deg);
+               perspective(500px) 
+               rotateY(8deg)      /* Invertido para positivo: acompanha a lateral direita */
+               rotateX(-4deg)     /* Ajuste no eixo X */
+               rotateZ(-1deg);    /* Leve inclinação de alinhamento */
+               
     z-index: 10;
 }
+/* Esconde títulos, marcas e rótulos do TickCounter */
+.tickcounter .tc-title,
+.tickcounter .tc-label,
+.tickcounter .tc-logo,
+.tickcounter .tc-credits {
+    display: none !important;
+}
 
-/* Responsividade dos números do TickCounter */
+/* Estilização dos números do cronômetro */
 .tc-countdown, .tickcounter {
     font-family: 'VT323', monospace !important;
     color: #ff0000 !important;
     text-shadow: 
-        0 0 10px #ff0000,
-        0 0 20px #ff0000 !important;
-    filter: drop-shadow(0px 0px 8px rgba(255, 0, 0, 0.8));
+        0 0 8px #ff0000,
+        0 0 15px #ff0000 !important;
+    filter: drop-shadow(0px 0px 6px rgba(255, 0, 0, 0.8));
 }
+
