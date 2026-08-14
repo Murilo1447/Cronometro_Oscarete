@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Container com a imagem das Backrooms */
+.backrooms-container {
+    position: relative;
+    width: 100vw;
+    max-width: 1200px;
+    height: 100vh;
+    max-height: 675px; /* Mantém a proporção 16:9 */
+    background-image: url('fundo.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Posiciona o cronômetro EXATAMENTE na tela do relógio */
+/* Posiciona e inclina o cronômetro para encaixar na perspectiva do relógio */
+.clock-display {
+    position: absolute;
+    top: 55%;        /* Ajuste fino da altura vertical */
+    left: 52%;       /* Posição horizontal centralizada no visor */
+    width: 45%;        /* Largura ajustada para caber dentro da moldura */
+    
+    /* Aplica a inclinação 3D para acompanhar o ângulo da imagem */
+    transform: translate(-50%, -50%) 
+               perspective(600px) 
+               rotateY(-7deg)    /* Gira levemente para acompanhar o lado do relógio */
+               rotateX(6deg)     /* Inclina para trás acompanhando a mesa */
+               rotateZ(-0.99deg); /* Leve ajuste de rotação no próprio eixo */
+               
+    z-index: 10;
+}
+
+/* Estilização para forçar cor vermelha brilhante e fonte LED */
+.tc-countdown, .tickcounter {
+    font-family: 'VT323', monospace !important;
+    color: #ff0000 !important;
+    text-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff0000 !important;
+    filter: drop-shadow(0px 0px 8px rgba(255, 0, 0, 0.8));
+}
