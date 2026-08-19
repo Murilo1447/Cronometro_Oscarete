@@ -10,47 +10,51 @@ body {
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
 }
 
-/* O TRUQUE: Cria uma caixa 16:9 exata que nunca ultrapassa a tela, gerando as bordas pretas */
+/* Moldura travada em 16:9 */
 .backrooms-container {
     position: relative;
-    width: 100%;
-    height: 100%;
-    
-    /* Trava a caixa para que ela não estique e mantenha a proporção */
-    max-width: calc(100vh * (16 / 9));
-    max-height: calc(100vw * (9 / 16));
+    width: 100vw;
     aspect-ratio: 16 / 9;
-    
+    max-height: 100dvh;
+    max-width: calc(100dvh * (16 / 9));
     background-image: url('fundo.jpg');
-    background-size: 100% 100%; /* Encaixa a imagem milimetricamente na caixa */
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
-    
-    /* Transforma o container na referência principal de tamanho para a fonte */
     container-type: size;
 }
 
+/* ==========================================================
+   1. PADRÃO: DESKTOP / COMPUTADORES
+   ========================================================== */
 /* Encaixe e inclinação exata na moldura */
+
 .clock-display {
+
     position: absolute;
+
     top: 55.5%;          
-    left: 55%;           
+    left: 54%;          
     width: 42%;          
-    
-    transform: translate(-50%, -50%) 
-               perspective(500px) 
-               rotateY(8deg) 
-               rotateX(-4deg) 
+    transform: translate(-50%, -50%)
+
+               perspective(500px)
+
+               rotateY(8deg)
+
+               rotateX(-4deg)
+
                rotateZ(-1deg);
-               
     z-index: 10;
 }
 
-/* Esconde títulos, marcas e rótulos do TickCounter */
+
+
+/* Estilização do TickCounter */
 .tickcounter .tc-title,
 .tickcounter .tc-label,
 .tickcounter .tc-logo,
@@ -58,22 +62,12 @@ body {
     display: none !important;
 }
 
-/* Estilização dos números do cronômetro */
 .tc-countdown, .tickcounter {
     font-family: 'VT323', monospace !important;
     color: #ff0000 !important;
-    text-shadow: 
-        0 0 8px #ff0000,
-        0 0 15px #ff0000 !important;
+    text-shadow: 0 0 8px #ff0000, 0 0 15px #ff0000 !important;
     filter: drop-shadow(0px 0px 6px rgba(255, 0, 0, 0.8));
-    white-space: nowrap !important; /* Impede a quebra de linha */
-}
-
-.tickcounter span, 
-.tickcounter div {
-    /* cqw = Container Query Width. A fonte cresce amarrada à IMAGEM e não à tela! */
-    font-size: 3.8cqw !important;
-    line-height: 1 !important;
+    white-space: nowrap !important;
 }
 
 .bloquear-clique {
@@ -81,7 +75,6 @@ body {
     user-select: none;
 }
 
-/* Escudo transparente para bloquear cliques no iframe */
 .escudo-bloqueio {
     position: absolute;
     top: 0;
@@ -93,26 +86,27 @@ body {
     cursor: default;
 }
 
-/* Estilo do aviso de som */
+/* Aviso de Som */
 .alerta-som {
     position: absolute;
-    top: 5%;
-    
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
     color: #ff0000;
     font-family: 'VT323', monospace, sans-serif;
     font-size: 1.5rem;
     text-shadow: 0 0 8px #ff0000;
     z-index: 1000;
-    pointer-events: none; /* Deixa o clique atravessar o texto e acertar a tela */
+    pointer-events: none; 
     transition: opacity 0.5s ease;
 }
 
-/* Esconde o ícone quando o som estiver tocando */
 .alerta-som.oculto {
     display: none !important;
 }
 
-/* Animação para fazer o texto/ícone piscar */
 @keyframes piscar-animacao {
     0% { opacity: 1; }
     50% { opacity: 0.2; }
