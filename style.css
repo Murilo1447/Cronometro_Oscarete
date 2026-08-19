@@ -38,7 +38,7 @@ body {
 .clock-display {
     position: absolute;
     top: 55.5%;          
-    left: 54%;           
+    left: 55%;           
     width: 42%;          
     
     transform: translate(-50%, -50%) 
@@ -91,4 +91,34 @@ body {
     z-index: 999;
     background: transparent;
     cursor: default;
+}
+
+/* Estilo do aviso de som */
+.alerta-som {
+    position: absolute;
+    top: 5%;
+    
+    color: #ff0000;
+    font-family: 'VT323', monospace, sans-serif;
+    font-size: 1.5rem;
+    text-shadow: 0 0 8px #ff0000;
+    z-index: 1000;
+    pointer-events: none; /* Deixa o clique atravessar o texto e acertar a tela */
+    transition: opacity 0.5s ease;
+}
+
+/* Esconde o ícone quando o som estiver tocando */
+.alerta-som.oculto {
+    display: none !important;
+}
+
+/* Animação para fazer o texto/ícone piscar */
+@keyframes piscar-animacao {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+
+.piscar {
+    animation: piscar-animacao 1.5s infinite;
 }

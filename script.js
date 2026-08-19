@@ -11,14 +11,20 @@
 // Função para tocar a música
 function iniciarAudio() {
     const audio = document.getElementById('musica-fundo');
+    const alertaSom = document.getElementById('alerta-som');
     
     if (audio && audio.paused) {
         audio.play().then(() => {
+            // Se o áudio tocar com sucesso, esconde o ícone piscante
+            if (alertaSom) {
+                alertaSom.classList.add('oculto');
+            }
+            
             // Assim que tocar, remove os ouvintes para não rodar de novo
             document.removeEventListener('click', iniciarAudio);
             document.removeEventListener('touchstart', iniciarAudio);
         }).catch(err => {
-            console.log("Aguardando interação...");
+            console.log("Aguardando interação do usuário para tocar o som...");
         });
     }
 }
@@ -26,3 +32,4 @@ function iniciarAudio() {
 // Toca ao clicar ou ao tocar na tela do celular
 document.addEventListener('click', iniciarAudio);
 document.addEventListener('touchstart', iniciarAudio);
+
