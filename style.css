@@ -9,41 +9,52 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    width: 100vw;
+    height: 100dvh;
     overflow: hidden;
 }
 
-/* Container amarrado na proporção da imagem (16:9) */
+/* Moldura travada em 16:9 */
 .backrooms-container {
     position: relative;
     width: 100vw;
-    max-width: 1200px;
     aspect-ratio: 16 / 9;
+    max-height: 100dvh;
+    max-width: calc(100dvh * (16 / 9));
     background-image: url('fundo.jpg');
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
+    container-type: size;
 }
 
+/* ==========================================================
+   1. PADRÃO: DESKTOP / COMPUTADORES
+   ========================================================== */
 /* Encaixe e inclinação exata na moldura */
-/* Posiciona e estica os números no visor do relógio */
-/* Correção da perspectiva (invertendo a rotação) */
+
 .clock-display {
+
     position: absolute;
-    top: 55.5%;          /* Posição vertical */
-    left: 54%;         /* Posição horizontal */
-    width: 42%;          /* Largura dentro da moldura */
-    
-    /* Perspectiva e rotações corrigidas para o ângulo do relógio */
-    transform: translate(-50%, -50%) 
-               perspective(500px) 
-               rotateY(8deg)      /* Invertido para positivo: acompanha a lateral direita */
-               rotateX(-4deg)     /* Ajuste no eixo X */
-               rotateZ(-1deg);    /* Leve inclinação de alinhamento */
-               
+
+    top: 58%;          
+    left: 54%;          
+    width: 42%;          
+    transform: translate(-50%, -50%)
+
+               perspective(500px)
+
+               rotateY(8deg)
+
+               rotateX(-4deg)
+
+               rotateZ(-1deg);
     z-index: 10;
 }
-/* Esconde títulos, marcas e rótulos do TickCounter */
+
+
+
+/* Estilização do TickCounter */
 .tickcounter .tc-title,
 .tickcounter .tc-label,
 .tickcounter .tc-logo,
@@ -51,29 +62,57 @@ body {
     display: none !important;
 }
 
-/* Estilização dos números do cronômetro */
 .tc-countdown, .tickcounter {
     font-family: 'VT323', monospace !important;
     color: #ff0000 !important;
-    text-shadow: 
-        0 0 8px #ff0000,
-        0 0 15px #ff0000 !important;
+    text-shadow: 0 0 8px #ff0000, 0 0 15px #ff0000 !important;
     filter: drop-shadow(0px 0px 6px rgba(255, 0, 0, 0.8));
+    white-space: nowrap !important;
 }
 
 .bloquear-clique {
-  pointer-events: none; /* Impede qualquer clique ou redirecionamento */
-  user-select: none;    /* Impede selecionar o texto */
+    pointer-events: none;
+    user-select: none;
 }
 
-/* Escudo transparente para bloquear cliques no iframe */
 .escudo-bloqueio {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 999; /* Fica acima de tudo no relógio */
+    z-index: 999;
     background: transparent;
     cursor: default;
+}
+
+/* Aviso de Som */
+.alerta-som {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    color: #ff0000;
+    font-family: 'VT323', monospace, sans-serif;
+    font-size: 1.5rem;
+    text-shadow: 0 0 8px #ff0000;
+    z-index: 1000;
+    pointer-events: none; 
+    transition: opacity 0.5s ease;
+}
+
+.alerta-som.oculto {
+    display: none !important;
+}
+
+@keyframes piscar-animacao {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+
+.piscar {
+    animation: piscar-animacao 1.5s infinite;
 }
